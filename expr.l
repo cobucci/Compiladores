@@ -40,10 +40,10 @@ letra	[a-zA-Z_]
 ">=" {return MAIORIGUAL; }
 "==" {return IGUALIGUAL; }
 "!=" {return DIFERENTE; }
-"!"	 { return NEGACAO; }
-"&&" { return BE; }
-"||" { return BOU ;}
-"~"	{ return NEGACAO; }
+"&&" {return BE; }
+"||" {return BOU;}
+"!"	 {return NEGACAO; }
+"~"	{return NEGACAO; }
 
 {num}	{yylval=atof(yytext); return TNUM;}
 {letra}({letra}|{digito})* {return ID;}

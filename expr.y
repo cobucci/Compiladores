@@ -6,7 +6,7 @@
 
 %token TADD TMUL TSUB TDIV TAPAR TFPAR TNUM TFIM TACHAVE TFCHAVE TVIRGULA ID
 %token FLOAT INT STRING IF RETURN ELSE WHILE IGUAL READ PV VOID PRINT
-%token MENOR MAIOR MENORIGUAL MAIORIGUAL IGUALIGUAL DIFERENTE BE BOU NEGACAO	
+%token MENOR MAIOR MENORIGUAL MAIORIGUAL IGUALIGUAL DIFERENTE BE BOU NEGACAO
 
 
 %%
@@ -20,9 +20,9 @@ ExpressaoBool: ExpressaoBool BOU Marcador ExpressaoBool2
 	| ExpressaoBool2
 	;
 
-ExpressaoBool2:	NOT ExpressaoBool2
+ExpressaoBool2:	NEGACAO ExpressaoBool2
 	| TAPAR ExpressaoBool TFPAR
-	| ExpressoBool2 ExpressaoRelacional ExpressaoBool2
+	| ExpressaoBool2 ExpressaoRelacional ExpressaoBool2
 	| ExpressaoAritmetica
 	;
 
@@ -103,11 +103,11 @@ Comando: CmdSe
 Retorno : RETURN ExpressaoAritmetica PV
 | RETURN STRING PV
 
-CmdSe : IF TAPAR ExpressaoLogica TFPAR Bloco
- | IF TAPAR ExpressaoLogica TFPAR Bloco ELSE Bloco
+CmdSe : IF TAPAR ExpressaoBool TFPAR Bloco
+ | IF TAPAR ExpressaoBool TFPAR Bloco ELSE Bloco
  ;
 
- CmdEnquanto:  WHILE TAPAR ExpressaoLogica TFPAR Bloco
+ CmdEnquanto:  WHILE TAPAR ExpressaoBool TFPAR Bloco
 
  CmdAtrib: ID IGUAL ExpressaoAritmetica PV
 | ID IGUAL STRING PV
@@ -133,7 +133,7 @@ ListaParametros : ListaParametros TVIRGULA ExpressaoAritmetica
 | STRING
 ;
 
-ExpressaoLogica : ExpressaoAritmetica;
+
 
 
 
